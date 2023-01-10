@@ -10,20 +10,20 @@
    --paleta-rojo:tomato;
    --paleta-azul: steelblue;
 
+   --z-index-discreto: 1;
+   --z-index-regular: 2;
+   --z-index-sobresaliente: 3;
+
    --tablero-gap-size: 5px;
-   --tablero-gap-qty: 2;
-  
+   --tablero-gap-qty: 2;  
    --tablero-size: 300px;
    --tablero-extra-width: calc(var(--tablero-gap-qty) * var(--tablero-gap-size));
    --tablero-width: calc(var(--tablero-size) + var(--tablero-extra-width));
    --tablero-height: var(--tablero-width);
+   --tablero-font-size-resultado: 40px;
 
    --casilla-width: 100px;
-   --casilla-height: var(--casilla-width);
-
-   --z-index-discreto: 1;
-   --z-index-regular: 2;
-   --z-index-sobresaliente: 3;
+   --casilla-height: var(--casilla-width);   
 }
 
 * {
@@ -41,7 +41,6 @@ body {
 .alternador {
    display: none;
 }
-
 
 /*
 //////////////////////////////////////////
@@ -110,6 +109,95 @@ body {
 .tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after {
    content: "Turno de la 'x'";
 }
+
+/* muestra un mensaje cuando el jugador de la letra 'x' gana */
+/* [1,2,3] */
+.tablero:has(#x-1:checked ~ #x-2:checked ~ #x-3:checked)::after,
+/* [4,5,6] */
+.tablero:has(#x-4:checked ~ #x-5:checked ~ #x-6:checked)::after, 
+/* [7,8,9] */
+.tablero:has(#x-7:checked ~ #x-8:checked ~ #x-9:checked)::after, 
+/* [1,4,7] */
+.tablero:has(#x-1:checked ~ #x-4:checked ~ #x-7:checked)::after, 
+/* [2,5,8] */
+.tablero:has(#x-2:checked ~ #x-5:checked ~ #x-8:checked)::after, 
+/* [3,6,9] */
+.tablero:has(#x-3:checked ~ #x-6:checked ~ #x-9:checked)::after,
+/* [1,5,9] */
+.tablero:has(#x-1:checked ~ #x-5:checked ~ #x-9:checked)::after, 
+/* [3,5,7] */ 
+.tablero:has(#x-3:checked ~ #x-5:checked ~ #x-7:checked)::after {
+   content: "¡Ganó la 'x'!";
+   font-size: var(--tablero-font-size-resultado);
+}
+
+/* muestra un mensaje cuando el jugador de la letra 'o' gana */
+/* [1,2,3] */ 
+.tablero:has(#o-1:checked ~ #o-2:checked ~ #o-3:checked)::after,
+/* [4,5,6] */ 
+.tablero:has(#o-4:checked ~ #o-5:checked ~ #o-6:checked)::after, 
+/* [7,8,9] */ 
+.tablero:has(#o-7:checked ~ #o-8:checked ~ #o-9:checked)::after, 
+/* [1,4,7] */ 
+.tablero:has(#o-1:checked ~ #o-4:checked ~ #o-7:checked)::after, 
+/* [2,5,8] */ 
+.tablero:has(#o-2:checked ~ #o-5:checked ~ #o-8:checked)::after, 
+/* [3,6,9] */ 
+.tablero:has(#o-3:checked ~ #o-6:checked ~ #o-9:checked)::after,
+/* [1,5,9] */ 
+.tablero:has(#o-1:checked ~ #o-5:checked ~ #o-9:checked)::after, 
+/* [3,5,7] */ 
+.tablero:has(#o-3:checked ~ #o-5:checked ~ #o-7:checked)::after {
+   content: "¡Ganó el 'o'!";
+   font-size: var(--tablero-font-size-resultado);
+}
+
+/* muestra un mensaje cuando hay empate */
+.tablero:has(
+   /* verifica si todas las casillas están marcadas */
+   .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ 
+   .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ 
+   .alternador:checked ~ .alternador:checked ~ .alternador:checked
+):not(
+   /* verifica si algún jugador ganó la partida */
+   /* [1,2,3] */ 
+   :has(#x-1:checked ~ #x-2:checked ~ #x-3:checked),
+   /* [4,5,6] */ 
+   :has(#x-4:checked ~ #x-5:checked ~ #x-6:checked),
+   /* [7,8,9] */ 
+   :has(#x-7:checked ~ #x-8:checked ~ #x-9:checked),
+   /* [1,4,7] */ 
+   :has(#x-1:checked ~ #x-4:checked ~ #x-7:checked),
+   /* [2,5,8] */ 
+   :has(#x-2:checked ~ #x-5:checked ~ #x-8:checked),
+   /* [3,6,9] */ 
+   :has(#x-3:checked ~ #x-6:checked ~ #x-9:checked),
+   /* [1,5,9] */ 
+   :has(#x-1:checked ~ #x-5:checked ~ #x-9:checked),
+   /* [3,5,7] */
+   :has(#x-3:checked ~ #x-5:checked ~ #x-7:checked),
+
+   /* [1,2,3] */ 
+   :has(#o-1:checked ~ #o-2:checked ~ #o-3:checked),
+   /* [4,5,6] */ 
+   :has(#o-4:checked ~ #o-5:checked ~ #o-6:checked),
+   /* [7,8,9] */ 
+   :has(#o-7:checked ~ #o-8:checked ~ #o-9:checked),
+   /* [1,4,7] */ 
+   :has(#o-1:checked ~ #o-4:checked ~ #o-7:checked),
+   /* [2,5,8] */ 
+   :has(#o-2:checked ~ #o-5:checked ~ #o-8:checked),
+   /* [3,6,9] */ 
+   :has(#o-3:checked ~ #o-6:checked ~ #o-9:checked),
+   /* [1,5,9] */ 
+   :has(#o-1:checked ~ #o-5:checked ~ #o-9:checked),
+   /* [3,5,7] */
+   :has(#o-3:checked ~ #o-5:checked ~ #o-7:checked)
+)::after {
+   content: "¡Empate!";
+   font-size: var(--tablero-font-size-resultado);
+}
+
 /*
 //////////////////////////////////////////
 ///////////////////// casilla
