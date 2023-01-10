@@ -23,6 +23,7 @@
 
    --z-index-discreto: 1;
    --z-index-regular: 2;
+   --z-index-sobresaliente: 3;
 }
 
 * {
@@ -37,9 +38,10 @@ body {
    background-color: var(--paleta-gris);
 }
 
-input[type="radio"] {
+.alternador {
    display: none;
 }
+
 
 /*
 //////////////////////////////////////////
@@ -62,6 +64,22 @@ input[type="radio"] {
    background-color: var(--paleta-negro);   
 }
 
+/* habilita marcar la letra 'o' en turnos pares */
+.tablero:has(.alternador:checked) .casilla-o,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o, 
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o {
+   z-index: var(--z-index-sobresaliente);
+}
+
+/* inhabilita marcar la letra 'o' en turnos impares */
+.tablero:has(.alternador:checked ~ .alternador:checked) .casilla-o, 
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o {
+   z-index: var(--z-index-discreto);
+}
 
 /*
 //////////////////////////////////////////
@@ -112,5 +130,20 @@ input[type="radio"] {
 #x-9:checked ~ .casilla:has(label[for="x-9"])::before {
    content: "X";
    color: var(--paleta-rojo);
+   background-color: var(--paleta-gris);
+}
+
+/* marca una casilla con la letra 'o' */
+#o-1:checked ~ .casilla:has(label[for="o-1"])::before, 
+#o-2:checked ~ .casilla:has(label[for="o-2"])::before, 
+#o-3:checked ~ .casilla:has(label[for="o-3"])::before, 
+#o-4:checked ~ .casilla:has(label[for="o-4"])::before, 
+#o-5:checked ~ .casilla:has(label[for="o-5"])::before, 
+#o-6:checked ~ .casilla:has(label[for="o-6"])::before, 
+#o-7:checked ~ .casilla:has(label[for="o-7"])::before, 
+#o-8:checked ~ .casilla:has(label[for="o-8"])::before,
+#o-9:checked ~ .casilla:has(label[for="o-9"])::before {
+   content: "O";
+   color: var(--paleta-azul);
    background-color: var(--paleta-gris);
 }
