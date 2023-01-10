@@ -1,0 +1,66 @@
+/*
+//////////////////////////////////////////
+///////////////////// general
+//////////////////////////////////////////
+*/
+:root {   
+   --paleta-blanco: #f6f6f6;
+   --paleta-gris: #ccc; 
+   --paleta-negro: #343434;
+
+   --tablero-gap-size: 5px;
+   --tablero-gap-qty: 2;
+  
+   --tablero-size: 300px;
+   --tablero-extra-width: calc(var(--tablero-gap-qty) * var(--tablero-gap-size));
+   --tablero-width: calc(var(--tablero-size) + var(--tablero-extra-width));
+   --tablero-height: var(--tablero-width);
+
+   --casilla-width: 100px;
+   --casilla-height: var(--casilla-width);
+}
+
+* {
+   box-sizing: border-box;
+   text-align: center;
+   font-family: Verdana;
+   color: var(--paleta-negro);
+   font-weight: bold;
+}
+
+body {
+   background-color: var(--paleta-gris);
+}
+
+/*
+//////////////////////////////////////////
+///////////////////// tablero
+//////////////////////////////////////////
+*/
+.tablero {
+   display: grid;   
+
+   width: var(--tablero-width);
+   height: var(--tablero-height);   
+   
+   left: 0; 
+   right: 0; 
+   margin: 0 auto;    
+   
+   grid-gap: var(--tablero-gap-size);
+   grid-template-columns: repeat(3, auto);
+   
+   background-color: var(--paleta-negro);   
+}
+
+
+/*
+//////////////////////////////////////////
+///////////////////// casilla
+//////////////////////////////////////////
+*/
+.casilla {
+   height: var(--casilla-height);
+   width: var(--casilla-width);
+   background-color: var(--paleta-blanco);
+}
