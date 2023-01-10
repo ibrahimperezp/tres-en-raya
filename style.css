@@ -64,6 +64,19 @@ body {
    background-color: var(--paleta-negro);   
 }
 
+.tablero::after {
+   content: "Turno de la 'X'";
+   display: inline-block;
+
+   width: var(--tablero-width);   
+   padding-top: 30px;
+   
+   position: absolute;
+   top: var(--tablero-height);
+   
+   font-size: 26px;
+}
+
 /* habilita marcar la letra 'o' en turnos pares */
 .tablero:has(.alternador:checked) .casilla-o,
 .tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked) .casilla-o, 
@@ -81,6 +94,22 @@ body {
    z-index: var(--z-index-discreto);
 }
 
+/* muestra un mensaje que notifica que es turno del jugador de la letra 'o' */
+.tablero:has(.alternador:checked)::after,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked)::after, 
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after {
+   content: "Turno del 'O'";
+}
+
+/* muestra un mensaje que notifica que es turno del jugador de la letra 'x' */
+.tablero:has(.alternador:checked ~ .alternador:checked)::after, 
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after,
+.tablero:has(.alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked ~ .alternador:checked)::after {
+   content: "Turno de la 'x'";
+}
 /*
 //////////////////////////////////////////
 ///////////////////// casilla
@@ -146,4 +175,34 @@ body {
    content: "O";
    color: var(--paleta-azul);
    background-color: var(--paleta-gris);
+}
+
+/* inhabilita marcar en casillas ya marcadas */
+#o-1:checked ~ #casilla-1 label, 
+#x-1:checked ~ #casilla-1 label,
+
+#o-2:checked ~ #casilla-2 label, 
+#x-2:checked ~ #casilla-2 label,
+
+#o-3:checked ~ #casilla-3 label, 
+#x-3:checked ~ #casilla-3 label,
+
+#o-4:checked ~ #casilla-4 label, 
+#x-4:checked ~ #casilla-4 label,
+
+#o-5:checked ~ #casilla-5 label, 
+#x-5:checked ~ #casilla-5 label,
+
+#o-6:checked ~ #casilla-6 label, 
+#x-6:checked ~ #casilla-6 label,  
+
+#o-7:checked ~ #casilla-7 label, 
+#x-7:checked ~ #casilla-7 label,
+
+#o-8:checked ~ #casilla-8 label, 
+#x-8:checked ~ #casilla-8 label,
+
+#o-9:checked ~ #casilla-9 label, 
+#x-9:checked ~ #casilla-9 label {
+   display: none;
 }
