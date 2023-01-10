@@ -6,9 +6,10 @@
 :root {   
    --paleta-blanco: #f6f6f6;
    --paleta-gris: #ccc; 
+   --paleta-gris-sombra: #aaa;
    --paleta-negro: #343434;
    --paleta-rojo:tomato;
-   --paleta-azul: steelblue;
+   --paleta-azul: steelblue;   
 
    --z-index-discreto: 1;
    --z-index-regular: 2;
@@ -61,18 +62,16 @@ body {
    grid-template-columns: repeat(3, auto);
    
    background-color: var(--paleta-negro);   
-   box-shadow: 0px 0px 8px #aaa;
+   box-shadow: 0px 0px 8px var(--paleta-gris-sombra);
 }
 
 .tablero::after {
    content: "Turno de la 'X'";
    display: inline-block;
-
-   width: var(--tablero-width);   
-   padding-top: 30px;
+   width: var(--tablero-width); 
    
    position: absolute;
-   top: var(--tablero-height);
+   top: 480px;
    
    font-size: 26px;
 }
@@ -374,4 +373,29 @@ body {
 #o-9:checked ~ #casilla-9 label, 
 #x-9:checked ~ #casilla-9 label {
    display: none;
+}
+
+/*
+//////////////////////////////////////////
+///////////////////// reinicio
+//////////////////////////////////////////
+*/
+.reinicio {
+   padding: 20px;   
+   margin: 30px;   
+   
+   cursor: pointer;
+
+   border: none;
+
+   color: var(--paleta-blanco);
+   font-size: 18px;
+
+   background-color: var(--paleta-rojo);
+   box-shadow: 0px 0px 3px var(--paleta-gris-sombra);
+}
+
+.reinicio:active {
+   color: var(--paleta-rojo);
+   background-color: var(--paleta-blanco);
 }
